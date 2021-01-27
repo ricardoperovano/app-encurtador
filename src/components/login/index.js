@@ -19,7 +19,11 @@ const Login = ({ history }) => {
 
       history.push("/");
     } catch (err) {
-      setError(err.response.data.error.error);
+      if (err.response) {
+        setError(err.response.data.error.error);
+      } else {
+        setError("Erro ao realizar o Login");
+      }
     }
   };
 

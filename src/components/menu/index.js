@@ -1,25 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
+import { withRouter } from "react-router-dom";
 import { Menu } from "semantic-ui-react";
 
-const NavMenu = () => {
-  const [activeItem, setActiveItem] = useState();
+const NavMenu = ({ history }) => {
+  const handleLogOut = () => {
+    sessionStorage.removeItem("token");
 
-  const handleItemClick = (e, { name }) => setActiveItem(name);
+    history.push("/login");
+  };
 
   return (
-    <Menu stackable>
-      <Menu.Item>Encurtador</Menu.Item>
+    <Menu>
+      <Menu.Item header onClick={() => history.push("/")}>
+        Encurtador
+      </Menu.Item>
 
       <Menu.Item
         position="right"
-        name="sair"
-        active={activeItem === "sair"}
-        onClick={handleItemClick}
+        name="nova"
+        onClick={() => history.push("/create")}
       >
-        Sair
+        Nova Url
       </Menu.Item>
+
+      {sessionStorage.token ? (
+        <Menu.Item name="sair" onClick={handleLogOut}>
+          Sair
+        </Menu.Item>
+      ) : (
+        <Menu.Item name="sair" onClick={() => history.push("/login")}>
+          Login
+        </Menu.Item>
+      )}
     </Menu>
   );
 };
 
-export default NavMenu;
+export default withRouter(NavMenu);

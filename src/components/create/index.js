@@ -37,6 +37,11 @@ const Create = ({ history }) => {
           </a>
         </Message>
       )}
+      {errors.error && (
+        <Message error onDismiss={() => setErrors({})}>
+          {errors.error.global}
+        </Message>
+      )}
       <div
         style={{
           width: "100%",

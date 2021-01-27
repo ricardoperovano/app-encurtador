@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Icon, Pagination, Table } from "semantic-ui-react";
+import api from "../../api";
 
 const Link = () => {
   const [links, setLinks] = useState([]);
@@ -12,7 +12,9 @@ const Link = () => {
    * @param {int} page
    */
   const getData = async (page) => {
-    const response = await axios.get(`http://localhost:9000?page=${page}`);
+    const response = await api.get(
+      `${process.env.REACT_APP_API_URL}?page=${page}`
+    );
 
     const { data, last_page, current_page } = response.data;
 

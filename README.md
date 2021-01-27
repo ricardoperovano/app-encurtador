@@ -32,3 +32,11 @@ Confira a url da api para não haver erros
 
 REACT_APP_API_URL=http://localhost:9000
 ```
+
+#### 3 - Testando a aplicação
+
+Para testar a aplicação execute
+
+```
+npm run start
+```
